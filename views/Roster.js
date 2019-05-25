@@ -1,14 +1,17 @@
 import React from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View, ScrollView } from "react-native";
 import axios from "axios";
+import { ListItem } from "react-native-elements";
 
 class Roster extends React.Component {
   componentWillMount() {
-    this.getRoster();
+    this.getRoster(this.props.navigation.state.params.teamId);
   }
+
   constructor(props) {
     super(props);
   }
+
   static navigationOptions = ({ navigation }) => {
     const { state } = navigation;
     return {
@@ -16,14 +19,22 @@ class Roster extends React.Component {
     };
   };
 
-  //backend call currently doesn't work if not on the same wifi
-  getRoster() {
+  state = {
+    players: []
+  };
+
+  getRoster(teamId) {
+    console.log(teamId);
     axios
-      .get("https://www.google.com/")
+      .get("https://ludis.herokuapp.com/api/teamroster", {
+        params: {
+          teamId: teamId
+        }
+      })
       .then(res => {
         if (res.data) {
-          console.log("request succeeded");
-          //this.setState((this.state.roster = "Request returned"));
+          this.setState((this.state.players = res.data));
+          console.log(res.data);
         }
       })
       .catch(err => {
@@ -34,10 +45,24 @@ class Roster extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
+    const { players } = this.state;
     return (
-      <View>
-        <Button title="Placholder" onPress={() => this.getRoster()} />
-      </View>
+      <ScrollView>
+        {players.map((item, i) => (
+          <ListItem
+            key={i}
+            title={"#" + item.number + " " + item.name}
+            //leftAvatar={{ source: { uri: item.avatar_url } }}
+            onPress={() =>
+              navigate("Player", {
+                title: item.name,
+                playerData: item
+              })
+            }
+            //rightIcon={{ name: "arrow-right", type: "font-awesome" }}
+          />
+        ))}
+      </ScrollView>
     );
   }
 }
