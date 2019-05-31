@@ -39,7 +39,6 @@ class Roster extends React.Component {
       })
       .catch(err => {
         console.log("request failed");
-        //this.setState((this.state.roster = "Request failed"));
       });
   }
 
@@ -52,7 +51,7 @@ class Roster extends React.Component {
           <ListItem
             key={i}
             title={"#" + item.number + " " + item.name}
-            //leftAvatar={{ source: { uri: item.avatar_url } }}
+            leftAvatar={{ source: { uri: item.image } }}
             onPress={() =>
               navigate("Player", {
                 title: item.name,
