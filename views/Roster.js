@@ -58,7 +58,7 @@ class Roster extends React.Component {
         {players.map((item, i) => (
           <ListItem
             key={i}
-            title={"#" + item.number + " " + item.name}
+            title={item.name}
             leftAvatar={{ source: { uri: item.image } }}
             onPress={() =>
               navigate("Player", {
@@ -66,7 +66,9 @@ class Roster extends React.Component {
                 playerData: item
               })
             }
-            //rightIcon={{ name: "arrow-right", type: "font-awesome" }}
+            chevron
+            chevronColor="#17408B"
+            containerStyle={styles.MainContainer}
           />
         ))}
       </ScrollView>
@@ -74,3 +76,22 @@ class Roster extends React.Component {
   }
 }
 export default Roster;
+
+const styles = StyleSheet.create({
+  MainContainer: {
+    backgroundColor: "#DEDEDE"
+  },
+  text: {
+    marginTop: 30,
+    fontSize: 30,
+    color: "black",
+    alignItems: "center"
+  },
+  playerImage: {
+    width: 200,
+    height: 200,
+    borderRadius: 200 / 2,
+    borderColor: "black",
+    borderWidth: 2
+  }
+});

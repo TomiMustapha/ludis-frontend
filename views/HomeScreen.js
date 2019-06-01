@@ -72,7 +72,9 @@ class HomeScreen extends React.Component {
                 teamId: item.teamId
               })
             }
-            rightIcon={{ name: "arrow-right", type: "font-awesome" }}
+            chevron
+            chevronColor="#17408B"
+            containerStyle={styles.MainContainer}
           />
         ))}
       </ScrollView>
@@ -80,3 +82,22 @@ class HomeScreen extends React.Component {
   }
 }
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+  MainContainer: {
+    backgroundColor: "#DEDEDE"
+  },
+  text: {
+    marginTop: 30,
+    fontSize: 30,
+    color: "black",
+    alignItems: "center"
+  },
+  playerImage: {
+    width: 200,
+    height: 200,
+    borderRadius: 200 / 2,
+    borderColor: "black",
+    borderWidth: 2
+  }
+});
