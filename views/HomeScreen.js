@@ -13,8 +13,19 @@ import { ListItem, Image } from "react-native-elements";
 import SvgUri from "react-native-svg-uri";
 
 class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: "Teams"
+  static navigationOptions = ({ navigation }) => {
+    const { state } = navigation;
+    return {
+      title: "Teams",
+      headerStyle: {
+        backgroundColor: "#17408B",
+        borderBottomColor: "white",
+        borderBottomWidth: 1,
+      },
+      headerTitleStyle: {
+        color: 'white'
+      }
+    };
   };
   componentWillMount() {
     this.getTeams();
@@ -61,7 +72,7 @@ class HomeScreen extends React.Component {
                 teamId: item.teamId
               })
             }
-            //rightIcon={{ name: "arrow-right", type: "font-awesome" }}
+            rightIcon={{ name: "arrow-right", type: "font-awesome" }}
           />
         ))}
       </ScrollView>

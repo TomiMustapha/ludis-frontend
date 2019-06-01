@@ -19,7 +19,15 @@ class Player extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { state } = navigation;
     return {
-      title: `${state.params.title}`
+      title: `${state.params.title}`,
+      headerStyle: {
+        backgroundColor: "#17408B",
+        borderBottomColor: "white",
+        borderBottomWidth: 1,
+      },
+      headerTitleStyle: {
+        color: 'white'
+      }
     };
   };
   state = {
@@ -40,6 +48,9 @@ class Player extends React.Component {
         <Text style={styles.text}>#{playerData.number}</Text>
         <Image source={{ uri: playerData.image }} style={styles.playerImage} />
         <Text style={styles.text}>{playerData.name}</Text>
+        <Text style={[styles.text, {fontSize: 15}]}>Height: {playerData.height}</Text>
+        <Text style={[styles.text, {fontSize: 15}]}>Weight: {playerData.weight}</Text>
+        <Text style={[styles.text, {fontSize: 15}]}>Position: {playerData.position}</Text>
       </ScrollView>
     );
   }
@@ -47,13 +58,13 @@ class Player extends React.Component {
 const styles = StyleSheet.create({
   MainContainer: {
     flex: 1,
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "#DEDEDE"
   },
   text: {
     marginTop: 30,
     fontSize: 30,
     color: "black",
-    fontWeight: "bold",
     alignItems: "center"
   },
   playerImage: {

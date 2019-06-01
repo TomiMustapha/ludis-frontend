@@ -15,7 +15,15 @@ class Roster extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { state } = navigation;
     return {
-      title: `${state.params.title}`
+      title: `${state.params.title}`,
+      headerStyle: {
+        backgroundColor: "#17408B",
+        borderBottomColor: "white",
+        borderBottomWidth: 1,
+      },
+      headerTitleStyle: {
+        color: 'white'
+      }
     };
   };
 
