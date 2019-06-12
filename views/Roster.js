@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, StyleSheet, Text, View, ScrollView } from "react-native";
+import { Button, StyleSheet, Text, View, ScrollView, ActivityIndicator } from "react-native";
 import axios from "axios";
 import { ListItem } from "react-native-elements";
 
@@ -28,11 +28,12 @@ class Roster extends React.Component {
   };
 
   state = {
-    players: []
+    players: [],
+    loading: false
   };
 
   getRoster(teamId) {
-    console.log(teamId);
+    this.setState({loading: true});
     axios
       .get("https://ludis.herokuapp.com/api/teamroster", {
         params: {
@@ -41,8 +42,8 @@ class Roster extends React.Component {
       })
       .then(res => {
         if (res.data) {
-          this.setState((this.state.players = res.data));
-          console.log(res.data);
+          this.setState({loading: false});
+          this.setState({players: res.data});
         }
       })
       .catch(err => {
@@ -53,7 +54,14 @@ class Roster extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     const { players } = this.state;
-    return (
+    const { loading } = this.state;
+
+    let display;
+
+    if (loading) {
+      display = <ActivityIndicator size="large" color="#17408B" animating={loading} />
+    } else {
+      display = 
       <ScrollView>
         {players.map((item, i) => (
           <ListItem
@@ -72,7 +80,9 @@ class Roster extends React.Component {
           />
         ))}
       </ScrollView>
-    );
+    }
+
+    return(display);
   }
 }
 export default Roster;

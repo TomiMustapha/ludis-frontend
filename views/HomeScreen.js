@@ -5,7 +5,8 @@ import {
   Text,
   View,
   FlatList,
-  ScrollView
+  ScrollView,
+  ActivityIndicator
 } from "react-native";
 import Roster from "./Roster";
 import axios from "axios";
@@ -34,15 +35,19 @@ class HomeScreen extends React.Component {
     super(props);
   }
   state = {
-    teams: []
+    teams: [],
+    loading: false
   };
   getTeams() {
+    this.setState({loading: true});
     axios
       .get("https://ludis.herokuapp.com/api/teams")
       .then(res => {
         // handle success
-        this.setState((this.state.teams = res.data));
-        console.log(res.data);
+        if (res.data) {
+          this.setState({teams: res.data});
+          this.setState({loading: false})  
+        }
       })
       .catch(error => {
         // handle error
@@ -52,33 +57,42 @@ class HomeScreen extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     const { teams } = this.state;
-    return (
-      <ScrollView>
-        {teams.map((item, i) => (
-          <ListItem
-            key={i}
-            title={item.fullName}
-            leftAvatar={
-              <Image
-                source={{
-                  uri:
-                    "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/203458.png"
-                }}
-              />
-            }
-            onPress={() =>
-              navigate("Roster", {
-                title: item.nickname + " Roster",
-                teamId: item.teamId
-              })
-            }
-            chevron
-            chevronColor="#17408B"
-            containerStyle={styles.MainContainer}
-          />
-        ))}
+    const { loading } = this.state;
+
+    let display;
+
+    if (loading) {
+      display = <ActivityIndicator size="large" color="#17408B" animating={loading} />
+    } else {
+      display = 
+        <ScrollView>
+          {teams.map((item, i) => (
+            <ListItem
+              key={i}
+              title={item.fullName}
+              leftAvatar={
+                <Image
+                  source={{
+                    uri:
+                      "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/203458.png"
+                  }}
+                />
+              }
+              onPress={() =>
+                navigate("Roster", {
+                  title: item.nickname + " Roster",
+                  teamId: item.teamId
+                })
+              }
+              chevron
+              chevronColor="#17408B"
+              containerStyle={styles.MainContainer}
+            />
+          ))}
       </ScrollView>
-    );
+    }
+
+    return (display);
   }
 }
 export default HomeScreen;
