@@ -19,11 +19,12 @@ class Roster extends React.Component {
       headerStyle: {
         backgroundColor: "#17408B",
         borderBottomColor: "white",
-        borderBottomWidth: 1,
+        borderBottomWidth: 1
       },
       headerTitleStyle: {
         color: 'white'
-      }
+      },
+      headerTintColor: "white"
     };
   };
 

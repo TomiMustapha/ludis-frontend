@@ -70,7 +70,10 @@ class HomeScreen extends React.Component {
             <ListItem
               key={i}
               title={item.fullName}
-              leftAvatar={{ source: { uri: item.logoPng } }}
+              leftAvatar={
+                { source: { uri: item.logoPng }, 
+                placeholderStyle: { backgroundColor: "#DEDEDE"}
+              }}
               onPress={() =>
                 navigate("Roster", {
                   title: item.nickname + " Roster",
@@ -99,12 +102,5 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: "black",
     alignItems: "center"
-  },
-  playerImage: {
-    width: 200,
-    height: 200,
-    borderRadius: 200 / 2,
-    borderColor: "black",
-    borderWidth: 2
   }
 });
