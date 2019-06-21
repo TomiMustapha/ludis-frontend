@@ -76,8 +76,6 @@ class Roster extends React.Component {
                 playerData: item
               })
             }
-            chevron
-            chevronColor="#17408B"
             containerStyle={styles.MainContainer}
           />
         ))}

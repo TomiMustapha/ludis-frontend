@@ -70,14 +70,7 @@ class HomeScreen extends React.Component {
             <ListItem
               key={i}
               title={item.fullName}
-              leftAvatar={
-                <Image
-                  source={{
-                    uri:
-                      "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/203458.png"
-                  }}
-                />
-              }
+              leftAvatar={{ source: { uri: item.logoPng } }}
               onPress={() =>
                 navigate("Roster", {
                   title: item.nickname + " Roster",
