@@ -61,13 +61,15 @@ class Roster extends React.Component {
     if (loading) {
       display = <ActivityIndicator size="large" color="#17408B" animating={loading} />
     } else {
-      display = 
+      display =
+      <View>
       <ScrollView>
         {players.map((item, i) => (
           <ListItem
             key={i}
             title={item.name}
             leftAvatar={{ source: { uri: item.image } }}
+            subtitle= {"#" + item.number + " | " + item.position + " | " + item.height + "\" | " + item.weight }
             onPress={() =>
               navigate("Player", {
                 title: item.name,
@@ -80,6 +82,7 @@ class Roster extends React.Component {
           />
         ))}
       </ScrollView>
+      </View> 
     }
 
     return(display);
