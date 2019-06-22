@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import Roster from "./Roster";
 import axios from "axios";
-import { ListItem, Image } from "react-native-elements";
+import { ListItem, Image, Icon } from "react-native-elements";
 import SvgUri from "react-native-svg-uri";
 
 class HomeScreen extends React.Component {
@@ -25,10 +25,24 @@ class HomeScreen extends React.Component {
       },
       headerTitleStyle: {
         color: 'white'
-      }
+      },
+      headerRight:
+      (
+        <Icon
+          name="refresh"
+          type="material"
+          color="white"
+          underlayColor="#17408B"
+          onPress={navigation.getParam('refresh')}
+          iconStyle={ {marginRight: 10} }
+        />
+      ),
     };
   };
   componentWillMount() {
+    this.props.navigation.setParams({
+      refresh: this._getTeams
+    });
     this.getTeams();
   }
   constructor(props) {
@@ -38,6 +52,9 @@ class HomeScreen extends React.Component {
     teams: [],
     loading: false
   };
+  _getTeams = () => {
+    this.getTeams();
+  }
   getTeams() {
     this.setState({loading: true});
     axios
@@ -62,7 +79,10 @@ class HomeScreen extends React.Component {
     let display;
 
     if (loading) {
-      display = <ActivityIndicator size="large" color="#17408B" animating={loading} />
+      display = 
+      <View style={ {flex: 1, justifyContent: "center" } }>
+        <ActivityIndicator size="large" color="#17408B" animating={loading}/>
+      </View>
     } else {
       display = 
         <ScrollView>
