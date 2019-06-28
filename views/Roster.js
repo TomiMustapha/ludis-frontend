@@ -66,6 +66,7 @@ class Roster extends React.Component {
         }
       })
       .catch(err => {
+        this.setState({loading: false});
         console.log("request failed");
       });
   }
@@ -79,13 +80,12 @@ class Roster extends React.Component {
 
     if (loading) {
       display = 
-      <View style={ {flex: 1, justifyContent: "center" } }>
+      <View style={ {flex: 1, justifyContent: "center", backgroundColor: "#DEDEDE" } }>
         <ActivityIndicator size="large" color="#17408B" animating={loading}/>
       </View>
     } else {
       display =
-      <View>
-      <ScrollView>
+      <ScrollView style={{backgroundColor: "#DEDEDE"}}>
         {players.map((item, i) => (
           <ListItem
             key={i}
@@ -102,7 +102,6 @@ class Roster extends React.Component {
           />
         ))}
       </ScrollView>
-      </View> 
     }
 
     return(display);

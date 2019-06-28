@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { Icon } from "react-native-elements";
 import HomeScreen from "./views/HomeScreen";
 import Roster from "./views/Roster";
 import Scores from "./views/Scores"
 import Axios from "axios";
-import { Ionicons } from '@expo/vector-icons';
 
 import { createStackNavigator, createAppContainer,createBottomTabNavigator } from "react-navigation";
 
@@ -19,7 +19,7 @@ const ScoresNavigator = createStackNavigator({
 
 const MainNavigator = createBottomTabNavigator(
   {
-    Roster:RosterNavigator,
+    Rosters:RosterNavigator,
     Scores: ScoresNavigator
   },
   {
@@ -27,21 +27,19 @@ const MainNavigator = createBottomTabNavigator(
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
-        if (routeName === 'Home') {
-          iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-        } else if (routeName === 'Settings') {
-          iconName = `ios-options${focused ? '' : '-outline'}`;
+        if (routeName === 'Rosters') {
+          iconName = 'people';
+        } else if (routeName === 'Scores') {
+          iconName = 'tv';
         }
 
-        // You can return any component that you like here! We usually use an
-        // icon component from react-native-vector-icons
-        return <Ionicons name={iconName} size={25} color={tintColor} />;
+        return <Icon name={iconName} type="material" size={25} color={tintColor} iconStyle={{marginTop: 10, alignItems: 'center'}} />;
       },
     }),
     tabBarOptions: {
-      activeTintColor: 'tomato',
+      activeTintColor: "#17408B",
       inactiveTintColor: 'gray',
-    },
+    }
   }
 
 );

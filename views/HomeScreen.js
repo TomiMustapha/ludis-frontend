@@ -68,6 +68,7 @@ class HomeScreen extends React.Component {
       })
       .catch(error => {
         // handle error
+        this.setState({loading: false});
         console.log(JSON.stringify(error));
       });
   }
@@ -80,12 +81,12 @@ class HomeScreen extends React.Component {
 
     if (loading) {
       display = 
-      <View style={ {flex: 1, justifyContent: "center" } }>
+      <View style={ {flex: 1, justifyContent: "center", backgroundColor: "#DEDEDE" } }>
         <ActivityIndicator size="large" color="#17408B" animating={loading}/>
       </View>
     } else {
       display = 
-        <ScrollView>
+        <ScrollView style={{backgroundColor: "#DEDEDE"}}>
           {teams.map((item, i) => (
             <ListItem
               key={i}
