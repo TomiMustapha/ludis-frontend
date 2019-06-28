@@ -10,8 +10,7 @@ import {
 } from "react-native";
 import Roster from "./Roster";
 import axios from "axios";
-import { ListItem, Image, Icon } from "react-native-elements";
-import SvgUri from "react-native-svg-uri";
+import { ListItem, Image, Icon, Avatar } from "react-native-elements";
 
 class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -92,12 +91,22 @@ class HomeScreen extends React.Component {
               key={i}
               title={item.fullName}
               leftAvatar={
-                { source: { uri: item.logoPng }, 
-                placeholderStyle: { backgroundColor: "#DEDEDE"}
-              }}
+                <Avatar
+                  size = "medium"
+                  activeOpacity = {1}
+                  source = {{ uri: item.logoPng }}
+                  placeholderStyle= {{ backgroundColor: "#DEDEDE" }}
+                  onPress={() =>
+                    navigate("Roster", {
+                      title: item.tricode + " Roster",
+                      teamId: item.teamId
+                    })
+                  }
+                />
+              }
               onPress={() =>
                 navigate("Roster", {
-                  title: item.nickname + " Roster",
+                  title: item.tricode + " Roster",
                   teamId: item.teamId
                 })
               }

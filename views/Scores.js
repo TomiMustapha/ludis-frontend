@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import Roster from "./Roster";
 import axios from "axios";
-import { ListItem, Image, Icon } from "react-native-elements";
+import { ListItem, Image, Icon, Avatar } from "react-native-elements";
 import DatePicker from 'react-native-datepicker';
 
 class Scores extends React.Component {
@@ -114,19 +114,31 @@ class Scores extends React.Component {
               title = {<Text style={styles.text} >{item.hTeam.score + " - " + item.vTeam.score}</Text>}
               subtitle = {item.playoff == true ? item.hTeam.series + ' - ' + item.vTeam.series : ''}
               leftAvatar={
-                { source: { uri: item.hTeam.logoPng }, 
-                placeholderStyle: { backgroundColor: "#DEDEDE"}
-              }}
+                <Avatar
+                  size = "medium"
+                  source = {{ uri: item.hTeam.logoPng }}
+                  placeholderStyle= {{ backgroundColor: "#DEDEDE"}}
+                  onPress={() =>
+                    navigate("Roster", {
+                      title: item.hTeam.triCode + " Roster",
+                      teamId: item.hTeam.teamId
+                    })
+                  }
+                />
+              }
               rightAvatar={
-                { source: { uri: item.vTeam.logoPng }, 
-                placeholderStyle: { backgroundColor: "#DEDEDE"}
-              }}
-            //   onPress={() =>
-            //     navigate("Roster", {
-            //       title: item.nickname + " Roster",
-            //       teamId: item.teamId
-            //     })
-            //   }
+                <Avatar
+                  size = "medium"
+                  source = {{ uri: item.vTeam.logoPng }}
+                  placeholderStyle= {{ backgroundColor: "#DEDEDE"}}
+                  onPress={() =>
+                    navigate("Roster", {
+                      title: item.vTeam.triCode + " Roster",
+                      teamId: item.vTeam.teamId
+                    })
+                  }
+                />
+              }
               containerStyle={styles.MainContainer}
             />
           ))}
