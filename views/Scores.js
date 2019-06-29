@@ -34,7 +34,8 @@ class Scores extends React.Component {
           hideText="true"
           format="YYYYMMDD" 
           mode="date" 
-          androidMode="spinner" 
+          androidMode="spinner"
+          maxDate={new Date()}
           iconComponent={<Icon name="date-range" type="material" color="white" iconStyle={{marginRight: 10}}/>}
           onDateChange={(date) => params.selectDate(date)}
         />
@@ -106,43 +107,52 @@ class Scores extends React.Component {
           <ActivityIndicator size="large" color="#17408B" animating={loading}/>
         </View>
     } else {
-      display =
-        <ScrollView style={{backgroundColor: "#DEDEDE"}}>
-          {scores.map((item, i) => (
-            <ListItem contentContainerStyle={{justifyContent: "center", alignItems: "center"}}
-              key={i}
-              title = {<Text style={styles.text} >{item.hTeam.score + " - " + item.vTeam.score}</Text>}
-              subtitle = {item.playoff == true ? item.hTeam.series + ' - ' + item.vTeam.series : ''}
-              leftAvatar={
-                <Avatar
-                  size = "medium"
-                  source = {{ uri: item.hTeam.logoPng }}
-                  placeholderStyle= {{ backgroundColor: "#DEDEDE"}}
-                  onPress={() =>
-                    navigate("Roster", {
-                      title: item.hTeam.triCode + " Roster",
-                      teamId: item.hTeam.teamId
-                    })
-                  }
-                />
-              }
-              rightAvatar={
-                <Avatar
-                  size = "medium"
-                  source = {{ uri: item.vTeam.logoPng }}
-                  placeholderStyle= {{ backgroundColor: "#DEDEDE"}}
-                  onPress={() =>
-                    navigate("Roster", {
-                      title: item.vTeam.triCode + " Roster",
-                      teamId: item.vTeam.teamId
-                    })
-                  }
-                />
-              }
-              containerStyle={styles.MainContainer}
-            />
-          ))}
-      </ScrollView>
+      if (scores.length == 0) {
+        display =
+          <View style={{flex: 1, justifyContent: "center", backgroundColor: "#DEDEDE", alignItems: "center"}}>
+            <Text>No games at given date.</Text>
+          </View>
+      } else {
+        display =
+          <ScrollView style={{backgroundColor: "#DEDEDE"}}>
+            {scores.map((item, i) => (
+              <ListItem contentContainerStyle={{justifyContent: "center", alignItems: "center"}}
+                key={i}
+                title = {<Text style={styles.text} >{item.hTeam.score + " - " + item.vTeam.score}</Text>}
+                leftElement = {<Text>{item.hTeam.triCode}</Text>}
+                rightElement = {<Text>{item.vTeam.triCode}</Text>}
+                subtitle = {item.playoff == true ? item.hTeam.series + ' - ' + item.vTeam.series : ''}
+                leftAvatar={
+                  <Avatar
+                    size = "medium"
+                    source = {{ uri: item.hTeam.logoPng }}
+                    placeholderStyle= {{ backgroundColor: "#DEDEDE"}}
+                    onPress={() =>
+                      navigate("Roster", {
+                        title: item.hTeam.triCode + " Roster",
+                        teamId: item.hTeam.teamId
+                      })
+                    }
+                  />
+                }
+                rightAvatar={
+                  <Avatar
+                    size = "medium"
+                    source = {{ uri: item.vTeam.logoPng }}
+                    placeholderStyle= {{ backgroundColor: "#DEDEDE"}}
+                    onPress={() =>
+                      navigate("Roster", {
+                        title: item.vTeam.triCode + " Roster",
+                        teamId: item.vTeam.teamId
+                      })
+                    }
+                  />
+                }
+                containerStyle={styles.MainContainer}
+              />
+            ))}
+        </ScrollView>
+      }
     }
 
     return (display);
