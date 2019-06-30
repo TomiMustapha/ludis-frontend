@@ -95,7 +95,7 @@ class HomeScreen extends React.Component {
                   size = "medium"
                   activeOpacity = {1}
                   source = {{ uri: item.logoPng }}
-                  placeholderStyle= {{ backgroundColor: "#DEDEDE" }}
+                  avatarStyle={{backgroundColor: "#DEDEDE"}}
                   onPress={() =>
                     navigate("Roster", {
                       title: item.tricode + " Roster",

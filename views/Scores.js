@@ -35,6 +35,8 @@ class Scores extends React.Component {
           format="YYYYMMDD" 
           mode="date" 
           androidMode="spinner"
+          confirmBtnText="Ok"
+          cancelBtnText="Cancel"
           maxDate={new Date()}
           iconComponent={<Icon name="date-range" type="material" color="white" iconStyle={{marginRight: 10}}/>}
           onDateChange={(date) => params.selectDate(date)}
@@ -119,14 +121,12 @@ class Scores extends React.Component {
               <ListItem contentContainerStyle={{justifyContent: "center", alignItems: "center"}}
                 key={i}
                 title = {<Text style={styles.text} >{item.hTeam.score + " - " + item.vTeam.score}</Text>}
-                leftElement = {<Text>{item.hTeam.triCode}</Text>}
-                rightElement = {<Text>{item.vTeam.triCode}</Text>}
                 subtitle = {item.playoff == true ? item.hTeam.series + ' - ' + item.vTeam.series : ''}
                 leftAvatar={
                   <Avatar
                     size = "medium"
                     source = {{ uri: item.hTeam.logoPng }}
-                    placeholderStyle= {{ backgroundColor: "#DEDEDE"}}
+                    avatarStyle={{backgroundColor: "#DEDEDE"}}
                     onPress={() =>
                       navigate("Roster", {
                         title: item.hTeam.triCode + " Roster",
@@ -139,7 +139,7 @@ class Scores extends React.Component {
                   <Avatar
                     size = "medium"
                     source = {{ uri: item.vTeam.logoPng }}
-                    placeholderStyle= {{ backgroundColor: "#DEDEDE"}}
+                    avatarStyle={{backgroundColor: "#DEDEDE"}}
                     onPress={() =>
                       navigate("Roster", {
                         title: item.vTeam.triCode + " Roster",
