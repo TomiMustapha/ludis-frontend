@@ -12,23 +12,15 @@ import Roster from "./Roster";
 import axios from "axios";
 import { ListItem, Image, Icon, Avatar } from "react-native-elements";
 import DatePicker from 'react-native-datepicker';
+import style from "../styles/style"
 
 class Scores extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { state } = navigation;
     const { params = {} } = navigation.state
     return {
-      title: "Scores",
-      headerStyle: {
-        backgroundColor: "#17408B",
-        borderBottomColor: "white",
-        borderBottomWidth: 1,
-      },
-      headerTitleStyle: {
-        color: 'white'
-      },
       headerRight:
-      (
+      <View>
         <DatePicker
           style={{alignItems: "flex-end"}}
           hideText="true"
@@ -41,9 +33,9 @@ class Scores extends React.Component {
           iconComponent={<Icon name="date-range" type="material" color="white" iconStyle={{marginRight: 10}}/>}
           onDateChange={(date) => params.selectDate(date)}
         />
-      )
+      </View>
     };
-  };
+}
   componentWillMount() {
     this.props.navigation.setParams({ selectDate: this._selectDate })
 
@@ -116,7 +108,7 @@ class Scores extends React.Component {
           </View>
       } else {
         display =
-          <ScrollView style={{backgroundColor: "#DEDEDE"}}>
+          <ScrollView style={style.base}>
             {scores.map((item, i) => (
               <ListItem contentContainerStyle={{justifyContent: "center", alignItems: "center"}}
                 key={i}

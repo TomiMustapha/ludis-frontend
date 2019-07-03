@@ -1,21 +1,43 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
 import { Icon } from "react-native-elements";
 import HomeScreen from "./views/HomeScreen";
 import Roster from "./views/Roster";
 import Scores from "./views/Scores"
-import Axios from "axios";
+import style from "./styles/style";
 
 import { createStackNavigator, createAppContainer,createBottomTabNavigator } from "react-navigation";
 
 const RosterNavigator = createStackNavigator({
   Home: { screen: HomeScreen },
   Roster: { screen: Roster },
-});
+}, {
+  defaultNavigationOptions: ({ navigation }) => ({
+    headerStyle: style.header,
+    headerTitleStyle: style.headerTitle,
+    headerTintColor: "white",
+    headerRight:
+    <Icon
+        name="refresh"
+        type="material"
+        color="white"
+        underlayColor="#17408B"
+        onPress={navigation.getParam('refresh')}
+        iconStyle={ {marginRight: 10} }
+      />
+  }
+)});
 
 const ScoresNavigator = createStackNavigator({
   Home: { screen: Scores },
-});
+}, {
+  defaultNavigationOptions: ({ navigation }) => ({
+    title: "Scores",
+    headerStyle: style.header,
+    headerTitleStyle: style.headerTitle,
+    
+  })
+  }
+);
 
 const MainNavigator = createBottomTabNavigator(
   {

@@ -11,31 +11,13 @@ import {
 import Roster from "./Roster";
 import axios from "axios";
 import { ListItem, Image, Icon, Avatar } from "react-native-elements";
+import style from "../styles/style"
 
 class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { state } = navigation;
     return {
       title: "Teams",
-      headerStyle: {
-        backgroundColor: "#17408B",
-        borderBottomColor: "white",
-        borderBottomWidth: 1,
-      },
-      headerTitleStyle: {
-        color: 'white'
-      },
-      headerRight:
-      (
-        <Icon
-          name="refresh"
-          type="material"
-          color="white"
-          underlayColor="#17408B"
-          onPress={navigation.getParam('refresh')}
-          iconStyle={ {marginRight: 10} }
-        />
-      ),
     };
   };
   componentWillMount() {
@@ -85,7 +67,7 @@ class HomeScreen extends React.Component {
       </View>
     } else {
       display = 
-        <ScrollView style={{backgroundColor: "#DEDEDE"}}>
+        <ScrollView style={style.base}>
           {teams.map((item, i) => (
             <ListItem
               key={i}

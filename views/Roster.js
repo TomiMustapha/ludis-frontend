@@ -2,8 +2,10 @@ import React from "react";
 import { Button, StyleSheet, Text, View, ScrollView, ActivityIndicator } from "react-native";
 import axios from "axios";
 import { ListItem, Icon } from "react-native-elements";
+import style from "../styles/style"
 
 class Roster extends React.Component {
+
   componentWillMount() {
     this.props.navigation.setParams({
       refresh: this._getRoster
@@ -19,26 +21,6 @@ class Roster extends React.Component {
     const { state } = navigation;
     return {
       title: `${state.params.title}`,
-      headerStyle: {
-        backgroundColor: "#17408B",
-        borderBottomColor: "white",
-        borderBottomWidth: 1
-      },
-      headerTitleStyle: {
-        color: 'white'
-      },
-      headerTintColor: "white",
-      headerRight:
-      (
-        <Icon
-          name="refresh"
-          type="material"
-          color="white"
-          underlayColor="#17408B"
-          onPress={navigation.getParam('refresh')}
-          iconStyle={ {marginRight: 10} }
-        />
-      ),
     };
   };
 
@@ -85,7 +67,7 @@ class Roster extends React.Component {
       </View>
     } else {
       display =
-      <ScrollView style={{backgroundColor: "#DEDEDE"}}>
+      <ScrollView style={style.base}>
         {players.map((item, i) => (
           <ListItem
             key={i}
