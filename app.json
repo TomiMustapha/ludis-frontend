@@ -7,7 +7,7 @@
     "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon_android.png",
+    "icon": "./assets/ludis_android.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
