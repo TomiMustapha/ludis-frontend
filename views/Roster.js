@@ -3,6 +3,7 @@ import { Button, StyleSheet, Text, View, ScrollView, ActivityIndicator } from "r
 import axios from "axios";
 import { ListItem, Icon } from "react-native-elements";
 import style from "../styles/style"
+import { withNavigation } from "react-navigation";
 
 class Roster extends React.Component {
 
@@ -10,7 +11,14 @@ class Roster extends React.Component {
     this.props.navigation.setParams({
       refresh: this._getRoster
     });
-    this.getRoster(this.props.navigation.state.params.teamId);
+    
+    this.focusListener = this.props.navigation.addListener("didFocus", () => {
+      this.getRoster(this.props.navigation.state.params.teamId);
+    });
+  }
+
+  componentWillUnmount() {
+    this.focusListener.remove();
   }
 
   constructor(props) {
