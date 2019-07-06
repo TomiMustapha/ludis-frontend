@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "nbaAppFrontend",
-    "slug": "nbaAppFrontend",
+    "name": "ludis",
+    "slug": "ludis",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": ["ios", "android"],
@@ -19,6 +19,9 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.bacc.ludis"
     }
   }
 }
