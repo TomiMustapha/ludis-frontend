@@ -88,6 +88,7 @@ class Roster extends React.Component {
                 playerData: item
               })
             }
+            activeOpacity={1}
             containerStyle={styles.MainContainer}
           />
         ))}
